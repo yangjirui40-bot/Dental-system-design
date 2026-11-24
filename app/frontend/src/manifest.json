@@ -1,0 +1,24 @@
+{
+  "name": "ADC牙科诊所",
+  "appid": "",
+  "description": "预约、接诊与治疗接续",
+  "versionName": "1.5.2",
+  "versionCode": "152",
+  "transformPx": false,
+  "vueVersion": "3",
+  "mp-weixin": {
+    "appid": "wxf278ca432c9e7224",
+    "setting": {
+      "urlCheck": true,
+      "es6": true,
+      "minified": true
+    },
+    "usingComponents": true
+  },
+  "h5": {
+    "title": "ADC牙科诊所",
+    "router": {
+      "mode": "hash"
+    }
+  }
+}

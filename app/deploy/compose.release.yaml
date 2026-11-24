@@ -1,0 +1,9 @@
+services:
+  db:
+    image: adc-clinic-postgres:${ADC_RELEASE:-20261111}
+  api:
+    image: adc-clinic-api:${ADC_API_RELEASE:-20261111}
+  web:
+    image: adc-clinic-web:${ADC_WEB_RELEASE:-20261111}
+  https:
+    image: adc-clinic-caddy:${ADC_RELEASE:-20261111}

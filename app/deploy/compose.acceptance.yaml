@@ -1,0 +1,14 @@
+# Isolated synthetic acceptance environment. Separate project and volume.
+services:
+  db:
+    environment:
+      POSTGRES_DB: adc_acceptance
+  api:
+    environment:
+      POSTGRES_DB: adc_acceptance
+      DEMO_PASSWORD: AdcDemo!2026#
+    command: [sh, -c, 'python bootstrap.py --demo && exec gunicorn adc.wsgi:application --bind 0.0.0.0:8000 --workers 2 --timeout 60 --access-logfile -']
+  web:
+    build:
+      dockerfile: deploy/Dockerfile.web.prebuilt
+    ports: !override ['127.0.0.1:18081:80']

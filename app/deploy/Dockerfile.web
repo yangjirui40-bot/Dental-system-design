@@ -1,0 +1,12 @@
+ARG ADC_NODE_IMAGE=node:22-bookworm-slim
+ARG ADC_NGINX_IMAGE=nginx:stable-alpine
+FROM ${ADC_NODE_IMAGE} AS build
+WORKDIR /frontend
+COPY frontend/package.json frontend/package-lock.json ./
+RUN npm ci --no-audit --no-fund
+COPY frontend/ ./
+RUN npm run build:h5
+FROM ${ADC_NGINX_IMAGE}
+COPY deploy/nginx.conf /etc/nginx/conf.d/default.conf
+COPY --from=build /frontend/dist/build/h5 /usr/share/nginx/html
+EXPOSE 80

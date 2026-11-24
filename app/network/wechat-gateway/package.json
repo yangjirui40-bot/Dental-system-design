@@ -1,0 +1,13 @@
+{
+  "name": "adc-wechat-network-gateway",
+  "version": "0.1.0",
+  "private": true,
+  "description": "Private WeChat development ingress to the existing ADC Docker API",
+  "main": "index.js",
+  "scripts": {
+    "test": "node --test --test-isolation=none test/*.test.js"
+  },
+  "dependencies": {
+    "ssh2": "1.17.0"
+  }
+}

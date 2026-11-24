@@ -1,0 +1,107 @@
+{
+  "pages": [
+    {
+      "path": "pages/index/index",
+      "style": {
+        "navigationBarTitleText": "ADC 牙科诊所",
+        "navigationStyle": "custom"
+      }
+    },
+    {
+      "path": "pages/directory/index",
+      "style": {
+        "navigationBarTitleText": "门店与医生",
+        "navigationStyle": "custom"
+      }
+    },
+    {
+      "path": "pages/appointments/book",
+      "style": {
+        "navigationBarTitleText": "预约就诊",
+        "navigationStyle": "custom"
+      }
+    },
+    {
+      "path": "pages/appointments/index",
+      "style": {
+        "navigationBarTitleText": "我的预约",
+        "navigationStyle": "custom"
+      }
+    },
+    {
+      "path": "pages/journey/index",
+      "style": {
+        "navigationBarTitleText": "治疗接续与结算",
+        "navigationStyle": "custom"
+      }
+    },
+    {
+      "path": "pages/services/index",
+      "style": {
+        "navigationBarTitleText": "全部业务",
+        "navigationStyle": "custom"
+      }
+    },
+    {
+      "path": "pages/operations/index",
+      "style": {
+        "navigationBarTitleText": "诊所业务",
+        "navigationStyle": "custom"
+      }
+    },
+    {
+      "path": "pages/me/index",
+      "style": {
+        "navigationBarTitleText": "我的账号",
+        "navigationStyle": "custom"
+      }
+    },
+    {
+      "path": "pages/privacy/index",
+      "style": {
+        "navigationBarTitleText": "隐私说明",
+        "navigationStyle": "custom"
+      }
+    },
+    {
+      "path": "pages/analytics/index",
+      "style": {
+        "navigationStyle": "custom",
+        "navigationBarTitleText": "经营分析与季度财务"
+      }
+    },
+    {
+      "path": "pages/audit/index",
+      "style": {
+        "navigationStyle": "custom",
+        "navigationBarTitleText": "业务操作记录"
+      }
+    },
+    {
+      "path": "pages/schedule/index",
+      "style": {
+        "navigationStyle": "custom",
+        "navigationBarTitleText": "出诊与跨店协调"
+      }
+    },
+    {
+      "path": "pages/invoice/index",
+      "style": {
+        "navigationStyle": "custom",
+        "navigationBarTitleText": "结算单副本"
+      }
+    },
+    {
+      "path": "pages/access/index",
+      "style": {
+        "navigationBarTitleText": "账号与身份",
+        "navigationStyle": "custom"
+      }
+    }
+  ],
+  "globalStyle": {
+    "navigationBarTextStyle": "black",
+    "navigationBarBackgroundColor": "#ffffff",
+    "backgroundColor": "#f2f5f8"
+  }
+}

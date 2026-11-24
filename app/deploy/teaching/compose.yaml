@@ -1,0 +1,47 @@
+name: adc-teaching
+services:
+  db:
+    image: ${TEACHING_POSTGRES_IMAGE:?}
+    environment:
+      POSTGRES_DB: adc_teaching
+      POSTGRES_USER: adc_teaching
+      POSTGRES_PASSWORD: ${TEACHING_DB_PASSWORD:?}
+      TZ: Asia/Shanghai
+    volumes: [teaching-data:/var/lib/postgresql]
+    networks:
+      private:
+        aliases: [adc-teaching-db]
+    restart: unless-stopped
+    healthcheck:
+      test: [CMD, pg_isready, -U, adc_teaching, -d, adc_teaching]
+      interval: 3s
+      timeout: 3s
+      retries: 30
+  teaching-api:
+    image: ${TEACHING_API_IMAGE:?}
+    depends_on:
+      db: {condition: service_healthy}
+    environment:
+      SECRET_KEY: ${TEACHING_SIGNING_KEY:?}
+      ADC_ENV: production
+      POSTGRES_HOST: adc-teaching-db
+      POSTGRES_PORT: "5432"
+      POSTGRES_DB: adc_teaching
+      POSTGRES_USER: adc_teaching
+      POSTGRES_PASSWORD: ${TEACHING_DB_PASSWORD:?}
+      ALLOWED_HOSTS: localhost,127.0.0.1,api.yjr-adc-demo.xyz
+    networks: [private, clinic]
+    command: [gunicorn, 'adc.wsgi:application', --bind, '0.0.0.0:8000', --workers, '1', --timeout, '60']
+    restart: unless-stopped
+    healthcheck:
+      test: [CMD, python, -c, 'import urllib.request; urllib.request.urlopen("http://localhost:8000/healthz",timeout=4)']
+      interval: 8s
+      timeout: 5s
+      retries: 12
+networks:
+  private: {internal: true}
+  clinic:
+    external: true
+    name: ${TEACHING_WEB_NETWORK:?}
+volumes:
+  teaching-data:

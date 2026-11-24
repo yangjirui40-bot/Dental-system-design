@@ -1,0 +1,12 @@
+**
+!deploy/
+deploy/**
+!deploy/nginx.conf
+!frontend/
+frontend/**
+!frontend/dist/
+frontend/dist/**
+!frontend/dist/cloud/
+frontend/dist/cloud/**
+!frontend/dist/cloud/h5/
+!frontend/dist/cloud/h5/**

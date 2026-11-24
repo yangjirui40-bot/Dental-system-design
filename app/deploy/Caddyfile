@@ -1,0 +1,13 @@
+{
+    servers {
+        protocols h1 h2
+    }
+}
+{$API_DOMAIN} {
+    tls {
+        key_type rsa2048
+        curves x25519 secp256r1
+    }
+    encode gzip zstd
+    reverse_proxy web:80
+}

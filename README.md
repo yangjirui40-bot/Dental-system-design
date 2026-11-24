@@ -1,2 +1,30 @@
-# Dental-system-design
-This document provides a detailed about the dental system' s design document and code.
+# ADC 牙科连锁诊所系统
+
+本仓库保存课程项目的最新设计文档、患者微信小程序与诊所管理网页的完整应用源码、部署配置和使用说明。两个客户端连接同一套后端业务接口；教学环境使用独立的模拟资料库。
+
+## 直接使用
+
+| 入口 | 地址或文件 | 使用者 |
+| --- | --- | --- |
+| 诊所管理平台 | https://api.yjr-adc-demo.xyz/ | 前台接待、牙医、诊所主管、总部业务、总部财务、总部负责人 |
+| 患者微信小程序 | [1.5.2 患者体验二维码](miniapp/微信1.5.2患者体验二维码.png) | 患者本人及已授权代办人；体验码可能要求加入体验成员 |
+| 患者直接预览 | [1.5.2 患者预览二维码](miniapp/微信1.5.2患者预览二维码.jpg) | 小程序管理员或开发者工具授权成员 |
+
+操作前请看[登录说明](docs/LOGIN.md)与[使用手册](docs/USER_GUIDE.md)。管理平台的教学岗位可直接在登录页选择，教学密码也在密码框下方显示。小程序选择“账号密码登录”后可选患者本人或授权代办人，也支持微信验证、注册和找回密码。请只输入虚构教学资料。
+
+> 本地留存的 2026-11-20 发布记录显示：管理网页为 1.5.2，微信 1.5.2 已设为体验版并提交审核；当时公开版为 1.2.4。微信审核和二维码有效性会变化，实际状态以微信公众平台为准。仓库中的二维码不是“已正式发布”的证明。
+
+## 文档与源码
+
+- [最新系统分析与设计文档 PDF](design-document/ADC牙科连锁诊所系统分析与设计文档.pdf)
+- [系统设计规范](docs/DESIGN.md) · [使用手册](docs/USER_GUIDE.md) · [隐私说明](docs/PRIVACY.md)
+- [本地运行与部署](docs/RUN_AND_DEPLOY.md) · [登录与岗位](docs/LOGIN.md)
+- `app/frontend/`：Vue 3、TypeScript、uni-app 的管理网页和患者微信小程序，共享组件与业务页面；`src/manifest.json` 标记小程序版本 1.5.2。
+- `app/backend/`：Django API、业务规则、测试和初始化程序。
+- `app/contracts/`：API 与数据库契约。
+- `app/network/wechat-gateway/`：微信云函数网络通道及测试。
+- `app/deploy/`、`app/compose.yaml`、`app/scripts/`：Docker、教学环境与构建部署脚本。
+
+仓库不包含 `.env`、AppSecret、SSH 私钥、数据库备份、真实患者记录、依赖包及编译产物。实际运行需自行配置环境变量和账号；不要把生产密钥或患者资料提交到公开仓库。
+
+本项目为系统分析与设计课程实践，演示诊所、医生、患者和业务数据均为合成资料，不代表真实医疗机构或可开展临床服务的资质。

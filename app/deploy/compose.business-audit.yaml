@@ -1,0 +1,4 @@
+services:
+  web:
+    build:
+      dockerfile: deploy/Dockerfile.web.cloud-network

@@ -1,0 +1,74 @@
+name: adc-clinic
+services:
+  db:
+    image: ${ADC_POSTGRES_IMAGE:-postgres:18.3-bookworm}
+    environment:
+      POSTGRES_DB: ${POSTGRES_DB:-adc}
+      POSTGRES_USER: ${POSTGRES_USER:-adc}
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD:?Set POSTGRES_PASSWORD in .env}
+      TZ: Asia/Shanghai
+    volumes:
+      - pgdata:/var/lib/postgresql
+    healthcheck:
+      test: [CMD-SHELL, 'pg_isready -U "$$POSTGRES_USER" -d "$$POSTGRES_DB"']
+      interval: 5s
+      timeout: 5s
+      retries: 20
+    restart: unless-stopped
+  api:
+    build:
+      context: .
+      dockerfile: backend/Dockerfile
+      args:
+        ADC_PYTHON_IMAGE: ${ADC_PYTHON_IMAGE:-python:3.12-slim-bookworm}
+    env_file: .env
+    environment:
+      POSTGRES_HOST: db
+      POSTGRES_PORT: 5432
+      CONTRACTS_DIR: /contracts
+      ADC_ENV: production
+    command: [sh, -c, 'python bootstrap.py && exec gunicorn adc.wsgi:application --bind 0.0.0.0:8000 --workers 2 --timeout 60 --access-logfile - --access-logformat ''%(m)s %(U)s %(s)s %(L)s''']
+    depends_on:
+      db:
+        condition: service_healthy
+    healthcheck:
+      test: [CMD, python, -c, 'import urllib.request; urllib.request.urlopen("http://127.0.0.1:8000/healthz",timeout=5)']
+      interval: 15s
+      timeout: 6s
+      retries: 10
+      start_period: 30s
+    restart: unless-stopped
+  web:
+    build:
+      context: .
+      dockerfile: ${ADC_WEB_DOCKERFILE:-deploy/Dockerfile.web}
+      args:
+        ADC_NODE_IMAGE: ${ADC_NODE_IMAGE:-node:22-bookworm-slim}
+        ADC_NGINX_IMAGE: ${ADC_NGINX_IMAGE:-nginx:stable-alpine}
+    ports: ['127.0.0.1:8080:80']
+    depends_on:
+      api:
+        condition: service_healthy
+    healthcheck:
+      test: [CMD-SHELL, 'wget -q -O /dev/null http://127.0.0.1/ && wget -q -O /dev/null http://127.0.0.1/healthz']
+      interval: 15s
+      timeout: 6s
+      retries: 10
+      start_period: 15s
+    restart: unless-stopped
+  https:
+    image: ${ADC_CADDY_IMAGE:-caddy:2}
+    profiles: [production]
+    environment:
+      API_DOMAIN: ${API_DOMAIN:-localhost}
+    ports: ['80:80', '443:443', '443:443/udp']
+    volumes:
+      - ./deploy/Caddyfile:/etc/caddy/Caddyfile:ro
+      - caddydata:/data
+      - caddyconfig:/config
+    depends_on: [web]
+    restart: unless-stopped
+volumes:
+  pgdata:
+  caddydata:
+  caddyconfig:
