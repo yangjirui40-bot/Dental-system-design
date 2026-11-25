@@ -2,7 +2,7 @@
 
 本仓库保存课程项目的最新设计文档、患者微信小程序与诊所管理网页的完整应用源码、部署配置和使用说明。两个客户端连接同一套后端业务接口；教学环境使用独立的模拟资料库。
 
-**设计文档：**[在线预览版（170 页，约 9.5 MB）](design-document/在线预览版.pdf) · [原版 PDF《1602240213+杨济瑞》（约 28.6 MB）](design-document/1602240213%2B杨济瑞.pdf?raw=1)。原版保留全部原始图片质量；如果 GitHub 的 PDF 预览无法加载，请点原版链接下载后在本机打开。预览版压缩了图片，文字和页数与原版一致。
+**设计文档：**[下载《1602240213+杨济瑞》PDF（170 页，约 18.9 MB）](design-document/1602240213%2B杨济瑞.pdf?raw=1)。若 GitHub 网页无法直接预览，点击链接下载后用本机 PDF 阅读器打开。本文件对超高分辨率图片作了适度压缩，页数、文字和页面尺寸均与本地原件一致；本地 Word 和原始 PDF 未改动。
 
 ## 直接使用
 
@@ -18,7 +18,7 @@
 
 ## 文档与源码
 
-- [最新系统分析与设计文档在线预览](design-document/在线预览版.pdf) · [原版 PDF 下载](design-document/1602240213%2B杨济瑞.pdf?raw=1)
+- [最新系统分析与设计文档 PDF 下载](design-document/1602240213%2B杨济瑞.pdf?raw=1)
 - [系统设计规范](docs/DESIGN.md) · [使用手册](docs/USER_GUIDE.md) · [隐私说明](docs/PRIVACY.md)
 - [本地运行与部署](docs/RUN_AND_DEPLOY.md) · [登录与岗位](docs/LOGIN.md)
 - `app/frontend/`：Vue 3、TypeScript、uni-app 的管理网页和患者微信小程序，共享组件与业务页面；`src/manifest.json` 标记小程序版本 1.5.2。
