@@ -2,6 +2,8 @@
 
 本仓库保存课程项目的最新设计文档、患者微信小程序与诊所管理网页的完整应用源码、部署配置和使用说明。两个客户端连接同一套后端业务接口；教学环境使用独立的模拟资料库。
 
+**设计文档：**[在线预览版（170 页，约 9.5 MB）](design-document/在线预览版.pdf) · [原版 PDF《1602240213+杨济瑞》（约 28.6 MB）](design-document/1602240213%2B杨济瑞.pdf?raw=1)。原版保留全部原始图片质量；如果 GitHub 的 PDF 预览无法加载，请点原版链接下载后在本机打开。预览版压缩了图片，文字和页数与原版一致。
+
 ## 直接使用
 
 | 入口 | 地址或文件 | 使用者 |
@@ -16,7 +18,7 @@
 
 ## 文档与源码
 
-- [最新系统分析与设计文档 PDF](design-document/ADC牙科连锁诊所系统分析与设计文档.pdf)
+- [最新系统分析与设计文档在线预览](design-document/在线预览版.pdf) · [原版 PDF 下载](design-document/1602240213%2B杨济瑞.pdf?raw=1)
 - [系统设计规范](docs/DESIGN.md) · [使用手册](docs/USER_GUIDE.md) · [隐私说明](docs/PRIVACY.md)
 - [本地运行与部署](docs/RUN_AND_DEPLOY.md) · [登录与岗位](docs/LOGIN.md)
 - `app/frontend/`：Vue 3、TypeScript、uni-app 的管理网页和患者微信小程序，共享组件与业务页面；`src/manifest.json` 标记小程序版本 1.5.2。
@@ -24,6 +26,8 @@
 - `app/contracts/`：API 与数据库契约。
 - `app/network/wechat-gateway/`：微信云函数网络通道及测试。
 - `app/deploy/`、`app/compose.yaml`、`app/scripts/`：Docker、教学环境与构建部署脚本。
+
+2026-11-25 对照本地项目逐文件校验：`app/frontend/` 的 59 个源码与配置文件、`app/backend/` 的 40 个源码与测试文件均与本地一致。`node_modules`、`dist`、`__pycache__` 是可重新生成的依赖或构建产物，未当作源码上传；私有 `.env` 和数据库备份也未上传。
 
 仓库不包含 `.env`、AppSecret、SSH 私钥、数据库备份、真实患者记录、依赖包及编译产物。实际运行需自行配置环境变量和账号；不要把生产密钥或患者资料提交到公开仓库。
 
